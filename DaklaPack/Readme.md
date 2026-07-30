@@ -41,7 +41,7 @@ We'll review your code and discuss your design choices. We're more interested in
 6. Verify the response containt the mutated file with the current date and a random character sequence added to its content.
 
 ### Alternative test
-Verify with a text file larger than 10 Mib
-Verify with a non text file
+Verify with a text file larger than 10 Mib get the correct error
+Verify with a non text file get the correct error
 
 
