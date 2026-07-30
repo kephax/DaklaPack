@@ -5,6 +5,13 @@ namespace DaklaPack.Services
 {
     public class FileMutationService : IFileMutationService
     {
+        /// <summary>
+        /// Mutates the provided file stream by adding a timestamp and a random character sequence.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<Stream> MutateFileAsync(Stream input, CancellationToken cancellationToken = default)
         {
             string randomCharachterSequence = GenerateRandomString(20); // 20 is the length of the random string
@@ -35,6 +42,11 @@ namespace DaklaPack.Services
             return output;
         }
 
+        /// <summary>
+        /// Generates a random string of the specified length using alphanumeric characters.
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
         private string GenerateRandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // Add more characters if needed
@@ -43,6 +55,11 @@ namespace DaklaPack.Services
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        /// <summary>
+        /// Validates if the provided stream's size is within the allowed limit (10 MiB).
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
         private bool IsFileSizeValid(Stream stream)
         {
             const long maxSizeInBytes = 10 * 1024 * 1024; // 10 MiB - Change to appropriate size limit if needed
@@ -54,6 +71,11 @@ namespace DaklaPack.Services
             return true;
         }
 
+        /// <summary>
+        /// Checks if the provided stream is a text file by examining its content.
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
         private bool IsTextFile(Stream stream)
         {
             // Check for common text file signatures (e.g., UTF-8 BOM)

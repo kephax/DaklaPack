@@ -15,6 +15,12 @@ namespace DaklaPack.Controllers
         }
 
 
+        /// <summary>
+        /// Mutates the uploaded text file by adding a timestamp and a random character sequence, then returns the mutated file for download.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         [HttpPost("mutate")]
         [ProducesResponseType(typeof(FileResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,6 +47,11 @@ namespace DaklaPack.Controllers
             return File(mutatedStream, "text/plain", downloadFileName);
         }
 
+        /// <summary>
+        /// Checks if the uploaded file is a text file based on its content type and extension.
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         private bool IsTextFile(IFormFile file)
         {
             if (!file.ContentType.StartsWith("text/", StringComparison.OrdinalIgnoreCase) &&
